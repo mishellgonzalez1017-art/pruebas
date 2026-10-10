@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && mkdir -p dist/assets/images/products dist/musica && cp -R assets/images/products/. dist/assets/images/products/ && cp -R musica/. dist/musica/",
     "preview": "vite preview"
   },
   "dependencies": {
