@@ -43,31 +43,55 @@ button { color: inherit; }
 
 /* Editorial entrance and brand */
 #hero {
-  background: transparent;
+  overflow: hidden;
+  isolation: isolate;
+  background: #f6f3ec;
   color: var(--color-text);
   padding: 24px;
+  perspective: none;
+  transform-style: flat;
 }
 #hero::before {
   content: '';
   position: absolute;
+  z-index: 0;
   inset: 0;
-  background: rgba(248, 247, 242, .70);
+  background:
+    radial-gradient(ellipse at 50% 44%, rgba(255,255,255,.78), transparent 48%),
+    radial-gradient(ellipse at 10% 12%, rgba(115,66,226,.055), transparent 34%),
+    radial-gradient(ellipse at 93% 86%, rgba(238,157,62,.075), transparent 34%),
+    #f6f3ec;
 }
-.glow-hero, .kiss-rain { display: none; }
-.intro-stage { width: min(100%, 720px); gap: 30px; }
-.intro-panel {
-  width: 100%;
-  padding: clamp(32px, 7vw, 74px) clamp(22px, 6vw, 68px) 48px;
-  border: 1px solid rgba(255,255,255,.78);
-  border-radius: 28px;
-  background: rgba(250,249,245,.80);
-  box-shadow: 0 26px 80px rgba(25,40,55,.12);
-  backdrop-filter: blur(18px);
+.glow-hero { display: none; }
+.halloween-rain { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+.rain-item {
+  position: absolute;
+  top: -14vh;
+  left: var(--x);
+  display: grid;
+  width: var(--size);
+  height: var(--size);
+  place-items: center;
+  color: #263644;
+  opacity: .34;
+  animation: halloweenRain var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform;
 }
+.rain-item svg { width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+.rain-hat { color: #c17c31; }
+.rain-ghost { color: #7563a7; }
+.rain-spider, .rain-web { color: #42515a; }
+.rain-candy, .rain-pumpkin { color: #d58434; }
+.rain-word { width: auto; height: auto; color: #c27d35; font: 800 clamp(11px, 1.05vw, 15px)/1 var(--font-heading); letter-spacing: .13em; }
+.rain-word-long { color: #514368; font-size: clamp(10px, .92vw, 13px); letter-spacing: .17em; }
+.intro-stage { z-index: 2; width: min(100%, 760px); gap: clamp(28px, 5vh, 48px); transform-style: flat; animation: introStageReveal .7s .1s cubic-bezier(.22,1,.36,1) both; will-change: auto; }
 .intro-brand, .intro-brand .brand-wordmark, .intro-title, .intro-title-letter {
   color: var(--color-text);
   -webkit-text-fill-color: var(--color-text);
 }
+.intro-brand { width: 100%; text-align: center; }
+.intro-brand .brand-wordmark { width: 100%; }
 .brand-wordmark {
   background: none;
   color: var(--color-text);
@@ -79,29 +103,29 @@ button { color: inherit; }
 }
 #headerLogo { color: var(--color-text); -webkit-text-fill-color: currentColor; }
 .kiss-o { filter: none; }
-.intro-brand::after {
-  content: 'CATÁLOGO · TEMPORADA ACTUAL';
-  display: block;
-  margin-top: 16px;
-  color: var(--color-muted);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .22em;
-}
+.intro-brand::after { content: none; }
+.intro-title { font-size: clamp(2.4rem, 9vw, 6rem); line-height: .98; letter-spacing: -.07em; white-space: nowrap; }
+.intro-title-letter { animation: none; }
+.intro-caption { margin: 18px 0 0; color: #596674; font-size: clamp(10px, 1.1vw, 12px); font-weight: 700; letter-spacing: .23em; }
+.intro-title .kiss-o { display: inline-block; margin: 0 .025em; font-size: .92em; transform: translateY(-.025em) rotate(-7deg); filter: drop-shadow(0 5px 5px rgba(115,66,226,.17)); }
 .intro-button, .intro-button:hover {
-  min-height: 56px;
-  padding: 0 30px;
+  min-height: 58px;
+  padding: 0 32px;
   border: 0;
   border-radius: 999px;
   background: var(--color-accent);
   color: #fff;
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: clamp(11px, 1.2vw, 13px);
   font-weight: 700;
-  letter-spacing: .12em;
-  box-shadow: 0 10px 28px rgba(115,66,226,.27);
+  letter-spacing: .09em;
+  box-shadow: 0 12px 30px rgba(115,66,226,.24);
+  transform: none;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  animation: introButtonReveal .65s .28s cubic-bezier(.22,1,.36,1) both;
 }
-.intro-button:hover { transform: translateY(-2px) scale(1.02); }
+.intro-button:hover { background: #6034c9; box-shadow: 0 16px 34px rgba(115,66,226,.3); transform: translateY(-2px); }
+.intro-button:active { transform: scale(.98); }
 
 /* Catalog header */
 #main-nav {
@@ -319,8 +343,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, [data-action="open-m
   #whatsapp-float { right: 16px; bottom: 86px; width: 50px; height: 50px; }
   #cart-toggle-btn { right: 16px; bottom: 18px; width: 54px; height: 54px; }
   #modal > div { border-radius: 0; }
+  #hero { padding: 22px; }
+  .intro-stage { gap: 30px; }
+  .intro-title { font-size: clamp(2.1rem, 9.4vw, 4.5rem); }
+  .intro-caption { margin-top: 14px; letter-spacing: .16em; }
+  .intro-button { max-width: min(100%, 360px); padding: 0 22px; font-size: 11px; }
+  .rain-item { opacity: .26; }
+  .rain-web, .rain-word-long { display: none; }
 }
 @media (max-width: 390px) {
+  .intro-title { font-size: clamp(1.9rem, 9vw, 2.2rem); }
+  .intro-button { min-height: 54px; letter-spacing: .045em; }
   #catalog-intro { display: block; }
   #catalog-count { display: block; margin-top: 8px; }
 }
@@ -336,4 +369,3 @@ button:focus-visible, a:focus-visible, input:focus-visible, [data-action="open-m
 .intro-button, .intro-button:hover { letter-spacing: .04em; }
 #catalog-intro .eyebrow { font-size: .73rem; }
 body::before { background: rgba(248, 247, 242, .72); }
-#hero::before { background: rgba(248, 247, 242, .30); }

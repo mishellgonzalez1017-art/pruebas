@@ -19,18 +19,6 @@
   to { opacity: 1; }
 }
 
-@keyframes kissRainFall {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -8vh, 0) scale(0.65) rotate(-8deg);
-  }
-  12% { opacity: 1; }
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--drift), 110vh, 0) scale(1.15) rotate(10deg);
-  }
-}
-
 @keyframes introStageReveal {
   from { opacity: 0; transform: translate3d(0, 18px, -24px) scale(0.96); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
@@ -54,6 +42,11 @@
 
 @keyframes introExit {
   to { opacity: 0; transform: translate3d(0, -10vh, 180px) rotateX(-14deg) scale(1.08); }
+}
+
+@keyframes halloweenRain {
+  0% { transform: translate3d(0, -12vh, 0) rotate(-8deg); }
+  100% { transform: translate3d(var(--sway), 118vh, 0) rotate(12deg); }
 }
 
 @keyframes heartRise {
@@ -85,11 +78,10 @@
 @media (prefers-reduced-motion: reduce) {
   #hero,
   .intro-stage,
-  .intro-panel,
   .intro-button,
   .intro-title-letter,
   .heart-particle,
-  .kiss-drop,
+  .rain-item,
   .brand-bounce,
   .cart-flight {
     animation: none;

@@ -26,27 +26,6 @@ export function createHeartShower(x, y) {
 }
 
 export function initEffects() {
-  const hero = document.getElementById('hero');
-  const introStage = document.getElementById('intro-stage');
-
-  if (hero) {
-    hero.addEventListener('pointermove', (event) => {
-      if (!introStage || hero.style.display === 'none') {
-        return;
-      }
-
-      const x = (event.clientX / window.innerWidth - 0.5) * 2;
-      const y = (event.clientY / window.innerHeight - 0.5) * 2;
-      introStage.style.transform = `rotateX(${y * -4}deg) rotateY(${x * 5}deg)`;
-    });
-
-    hero.addEventListener('pointerleave', () => {
-      if (introStage) {
-        introStage.style.transform = '';
-      }
-    });
-  }
-
   document.querySelectorAll('.kiss-o').forEach((kissElement) => {
     kissElement.addEventListener('click', (event) => createHeartShower(event.clientX, event.clientY));
     kissElement.addEventListener('touchstart', (event) => {
