@@ -73,7 +73,7 @@ button { color: inherit; }
   height: var(--size);
   place-items: center;
   color: #263644;
-  opacity: .34;
+  opacity: .48;
   animation: halloweenRain var(--duration) linear infinite;
   animation-delay: var(--delay);
   will-change: transform;
@@ -348,7 +348,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, [data-action="open-m
   .intro-title { font-size: clamp(2.1rem, 9.4vw, 4.5rem); }
   .intro-caption { margin-top: 14px; letter-spacing: .16em; }
   .intro-button { max-width: min(100%, 360px); padding: 0 22px; font-size: 11px; }
-  .rain-item { opacity: .26; }
+  .rain-item { opacity: .38; }
   .rain-web, .rain-word-long { display: none; }
 }
 @media (max-width: 390px) {
